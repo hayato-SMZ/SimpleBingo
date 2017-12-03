@@ -14,7 +14,6 @@ var Bingo = function(){
   };
 
   var saveBingoData = function(){
-    console.log(JSON.stringify({"dropList":dropList, "unDrop":unDrop}));
     localStorage.setItem(strageName,JSON.stringify({"dropList":dropList, "unDrop":unDrop}));
   };
 
@@ -60,7 +59,6 @@ var view = function(){
     bingoIns.init(document.querySelector("#maxNumber").value);
     bingoIns.dataLoad();
     setDropTextList(bingoIns.getdropList());
-
   });
   document.getElementById("gotoNext").addEventListener("click",function(e){
     currentNumber = bingoIns.drop();
@@ -78,21 +76,21 @@ var view = function(){
     shuffle.stop();
     shuffle.setText(""+currentNumber);
     numberObj.textContent = currentNumber;
-    setDropTextList(bingoIns.getdropList());
+    setDropTextList(bingoIns.getdropList(), currentNumber);
   });
 
-  var addDropNumber = function(number){
+  var addDropNumber = function(number, flag){
     var numberDom = document.createElement("div");
-    numberDom.className = "number";
+    numberDom.className = (flag)? "number isCurrent" : "number";
     numberDom.textContent = number;
     numbersObj.appendChild(numberDom);
   };
 
-  var setDropTextList = function(dropList){
+  var setDropTextList = function(dropList, currentNumber){
     numbersObj.innerHTML = "";
     for(var i = 0; i < dropList.length ;i++){
       if(dropList[i]){
-        addDropNumber(i);
+        addDropNumber(i, i == currentNumber);
       }
     }
   };

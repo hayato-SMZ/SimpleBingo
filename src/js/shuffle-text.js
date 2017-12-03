@@ -36,7 +36,7 @@
 	         * @type {number}
 	         * @default 600
 	         */
-	        this.duration = 100000000;
+	        this.duration = 10000;
 	        this._isRunning = false;
 	        this._originalStr = '';
 	        this._originalLength = 0;
