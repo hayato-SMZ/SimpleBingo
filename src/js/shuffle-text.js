@@ -39,7 +39,7 @@
 	        this.duration = 10000;
 	        this._isRunning = false;
 	        this._originalStr = '';
-	        this._originalLength = 0;
+	        this._originalLength = 2;
 	        this._timeCurrent = 0;
 	        this._timeStart = 0;
 	        this._randomIndex = [];

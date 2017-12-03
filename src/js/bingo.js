@@ -63,6 +63,8 @@ var view = function(){
   document.getElementById("gotoNext").addEventListener("click",function(e){
     currentNumber = bingoIns.drop();
     numberObj.textContent = "00";
+    shuffleNumber = (currentNumber < 10)? "0"+ currentNumber : currentNumber;
+    shuffle.setText(""+shuffleNumber);
     shuffle.start();
   });
   document.getElementById("hideCurrent").addEventListener("click",function(){
