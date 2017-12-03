@@ -66,9 +66,11 @@ var view = function(){
     shuffle.start();
   });
   document.getElementById("hideCurrent").addEventListener("click",function(){
+    document.querySelector(".numbers").style["font-size"] = "1.5em";
     document.querySelector(".current").style.display = "none";
   });
   document.getElementById("showCurrent").addEventListener("click",function(){
+    document.querySelector(".numbers").style["font-size"] = "1em";
     document.querySelector(".current").style.display = "block";
   });
 
