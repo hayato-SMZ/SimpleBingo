@@ -23,16 +23,16 @@ body{
 
 .numbers .number{
   display: inline-block;
-  line-height: 1.2em;
+  line-height: 1.5em;
   vertical-align: middle;
-  width: 1.2em;
-  height:1.2em;
+  width: 1.5em;
+  height:1.5em;
   margin: 0.2em;
   background-color: rgb(230,230,230);
   box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   border-radius: 2em;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
 .current{

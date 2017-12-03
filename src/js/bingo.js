@@ -1,8 +1,21 @@
 var Bingo = function(){
   var dropList = [];
   var unDrop = [];
+  var strageName = "smzSimpleBingo";
   this.init = function(maxNumber){
     unDropinit(maxNumber);
+  };
+
+  this.dataLoad = function(){
+    var loadData = localStorage.getItem(strageName);
+    var parseData = JSON.parse(loadData);
+    dropList = parseData.dropList;
+    unDrop = parseData.unDrop;
+  };
+
+  var saveBingoData = function(){
+    console.log(JSON.stringify({"dropList":dropList, "unDrop":unDrop}));
+    localStorage.setItem(strageName,JSON.stringify({"dropList":dropList, "unDrop":unDrop}));
   };
 
   var unDropinit = function(maxNumber){
@@ -17,6 +30,7 @@ var Bingo = function(){
     var choice = Math.floor(Math.random() * unDrop.length);
     choiceNumber = unDrop.slice(choice,choice + 1);
     dropList[choiceNumber] = true;
+    saveBingoData();
     return choiceNumber[0];
   };
 
@@ -24,12 +38,14 @@ var Bingo = function(){
     return dropList;
   };
 };
-var view =function(){
+
+var view = function(){
   var bingoIns;
   var numberObj = document.querySelector(".current .number");
   var numbersObj = document.querySelector(".dropList .numbers");
   var shuffle = new ShuffleText(numberObj);
   var newgame = document.getElementById("newgame");
+  var loadgame = document.getElementById("loadgame");
   var currentNumber = 0;
   newgame.addEventListener("click",function(){
     document.querySelector(".main").style.display = "block";
@@ -37,14 +53,21 @@ var view =function(){
     bingoIns = new Bingo();
     bingoIns.init(document.querySelector("#maxNumber").value);
   });
+  loadgame.addEventListener("click",function(){
+    document.querySelector(".main").style.display = "block";
+    document.querySelector(".menu").style.display = "none";
+    bingoIns = new Bingo();
+    bingoIns.init(document.querySelector("#maxNumber").value);
+    bingoIns.dataLoad();
+    setDropTextList(bingoIns.getdropList());
+
+  });
   document.getElementById("gotoNext").addEventListener("click",function(e){
     currentNumber = bingoIns.drop();
-    numberObj.textContent = "---";
+    numberObj.textContent = "00";
     shuffle.start();
-    shuffle.setText(""+currentNumber);
   });
   document.getElementById("hideCurrent").addEventListener("click",function(){
-    console.log("click");
     document.querySelector(".current").style.display = "none";
   });
   document.getElementById("showCurrent").addEventListener("click",function(){
@@ -53,6 +76,7 @@ var view =function(){
 
   numberObj.addEventListener("click",function(){
     shuffle.stop();
+    shuffle.setText(""+currentNumber);
     numberObj.textContent = currentNumber;
     setDropTextList(bingoIns.getdropList());
   });
