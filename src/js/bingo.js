@@ -32,7 +32,7 @@ var Bingo = function(){
     unDrop = unDrop.slice(0,choice).concat(unDrop.slice(choice + 1, unDrop.length));
     dropList[choiceNumber] = true;
     saveBingoData();
-    return choiceNumber[0];
+    return choiceNumber;
   };
 
   this.getdropList = function(){
@@ -65,8 +65,9 @@ var view = function(){
   document.getElementById("gotoNext").addEventListener("click",function(e){
     currentNumber = bingoIns.drop();
     numberObj.textContent = "00";
-    shuffleNumber = (currentNumber < 10)? "0"+ currentNumber : currentNumber;
-    shuffle.setText(""+shuffleNumber);
+    var shuffleNumber = (currentNumber < 10)? "0"+ currentNumber : currentNumber;
+    shuffle.setText("" + shuffleNumber);
+    console.log(shuffleNumber, currentNumber);
     shuffle.start();
   });
   document.getElementById("hideCurrent").addEventListener("click",function(){
