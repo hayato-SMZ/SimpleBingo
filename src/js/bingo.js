@@ -14,6 +14,7 @@ var Bingo = function(){
   };
 
   var saveBingoData = function(){
+    console.log(unDrop);
     localStorage.setItem(strageName,JSON.stringify({"dropList":dropList, "unDrop":unDrop}));
   };
 
@@ -27,7 +28,8 @@ var Bingo = function(){
 
   this.drop = function(){
     var choice = Math.floor(Math.random() * unDrop.length);
-    choiceNumber = unDrop.slice(choice,choice + 1);
+    choiceNumber = unDrop[choice];
+    unDrop = unDrop.slice(0,choice).concat(unDrop.slice(choice + 1, unDrop.length));
     dropList[choiceNumber] = true;
     saveBingoData();
     return choiceNumber[0];
